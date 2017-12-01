@@ -7,11 +7,9 @@
 //     1234 produces 0 because no digit matches the next.
 //     91212129 produces 9 because the only digit that matches the next one is the last digit, 9.
 
-function solve (input : string) : number {
-  const numerals : number[] = input.toString().split('').map(char => parseInt(char));
-
-  return numerals.reduce((acc : number, curr : number, index : number) : number => {
-    const next = numerals[(index + 1) % numerals.length];
+function solve (input : number[], offset: number) : number {
+  return input.reduce((acc : number, curr : number, index : number) : number => {
+    const next = input[(index + offset) % input.length];
 
     if (curr === next) {
       return acc + curr;
@@ -21,30 +19,16 @@ function solve (input : string) : number {
   }, 0);
 }
 
-console.log(solve("1122") === 3)
-console.log(solve("1111") === 4)
-console.log(solve("1234") === 0)
-console.log(solve("91212129") === 9)
-
-// Now, instead of considering the next digit, it wants you to consider the digit halfway around the circular list. That is, if your list contains 10 items, only include a digit in your sum if the digit 10/2 = 5 steps forward matches it. Fortunately, your list has an even number of elements.
-//
-function solveFancier (input : string) : number {
-  const numerals : number[] = input.toString().split('').map(char => parseInt(char));
-  const numberOfStepsAhead : number = numerals.length / 2;
-
-  return numerals.reduce((acc : number, curr : number, index : number) : number => {
-    const next = numerals[(index + numberOfStepsAhead) % numerals.length];
-
-    if (curr === next) {
-      return acc + curr;
-    } else {
-      return acc;
-    }
-  }, 0);
+function parseInput (input : string) : number[] {
+  return input.toString().split('').map(char => parseInt(char));
 }
 
-console.log(solveFancier("1212") === 6)
-console.log(solveFancier("1221") === 0)
-console.log(solveFancier("123425") === 4)
-console.log(solveFancier("123123") === 12)
-console.log(solveFancier("12131415") === 4)
+console.log(solve(parseInput("1122"), 1) === 3)
+console.log(solve(parseInput("1111"), 1) === 4)
+console.log(solve(parseInput("1234"), 1) === 0)
+console.log(solve(parseInput("91212129"), 1) === 9)
+console.log(solve(parseInput("1212"), 2) === 6)
+console.log(solve(parseInput("1221"), 2) === 0)
+console.log(solve(parseInput("123425"), 3) === 4)
+console.log(solve(parseInput("123123"), 3) === 12)
+console.log(solve(parseInput("12131415"), 4) === 4)
