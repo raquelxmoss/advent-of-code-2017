@@ -7,7 +7,7 @@
 //     1234 produces 0 because no digit matches the next.
 //     91212129 produces 9 because the only digit that matches the next one is the last digit, 9.
 
-function solve (input : number) : number {
+function solve (input : string) : number {
   const numerals : number[] = input.toString().split('').map(char => parseInt(char));
 
   return numerals.reduce((acc : number, curr : number, index : number) : number => {
@@ -21,7 +21,7 @@ function solve (input : number) : number {
   }, 0);
 }
 
-console.log(solve(1122) === 3)
-console.log(solve(1111) === 4)
-console.log(solve(1234) === 0)
-console.log(solve(91212129) === 9)
+console.log(solve("1122") === 3)
+console.log(solve("1111") === 4)
+console.log(solve("1234") === 0)
+console.log(solve("91212129") === 9)
