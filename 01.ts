@@ -25,3 +25,26 @@ console.log(solve("1122") === 3)
 console.log(solve("1111") === 4)
 console.log(solve("1234") === 0)
 console.log(solve("91212129") === 9)
+
+// Now, instead of considering the next digit, it wants you to consider the digit halfway around the circular list. That is, if your list contains 10 items, only include a digit in your sum if the digit 10/2 = 5 steps forward matches it. Fortunately, your list has an even number of elements.
+//
+function solveFancier (input : string) : number {
+  const numerals : number[] = input.toString().split('').map(char => parseInt(char));
+  const numberOfStepsAhead : number = numerals.length / 2;
+
+  return numerals.reduce((acc : number, curr : number, index : number) : number => {
+    const next = numerals[(index + numberOfStepsAhead) % numerals.length];
+
+    if (curr === next) {
+      return acc + curr;
+    } else {
+      return acc;
+    }
+  }, 0);
+}
+
+console.log(solveFancier("1212") === 6)
+console.log(solveFancier("1221") === 0)
+console.log(solveFancier("123425") === 4)
+console.log(solveFancier("123123") === 12)
+console.log(solveFancier("12131415") === 4)
