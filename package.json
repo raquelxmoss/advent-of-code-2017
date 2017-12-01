@@ -1,0 +1,21 @@
+{
+  "name": "advent-of-code-2017",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:raquelxmoss/advent-of-code-2018.git",
+  "author": "Raquel Moss <raquelxmoss@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "budo index.ts:bundle.js --live -p tsify",
+    "bundle": "browserify index.ts -o bundle.js -p tsify"
+  },
+  "devDependencies": {
+    "browserify": "^14.5.0",
+    "budo": "^10.0.4",
+    "tsify": "^3.0.3",
+    "typescript": "^2.6.2"
+  },
+  "dependencies": {
+    "nodemon": "^1.12.1"
+  }
+}
